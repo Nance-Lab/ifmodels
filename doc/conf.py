@@ -18,7 +18,7 @@ import os
 
 # General information about the project.
 project = 'ifmodels'
-copyright = '2015, Ariel Rokem'
+copyright = '2019, Hawley Helmbrecht'
 
 currentdir = os.path.abspath(os.path.dirname(__file__))
 ver_file = os.path.join(currentdir, '..', project, 'version.py')
@@ -237,7 +237,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'ifmodels.tex', 'ifmodels Documentation',
-   'Ariel Rokem', 'manual'),
+   'Hawley Helmbrecht', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -281,7 +281,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'ifmodels', 'ifmodels Documentation',
-   'Ariel Rokem', 'ifmodels', 'One line description of project.',
+   'Hawley Helmbrecht', 'ifmodels', 'One line description of project.',
    'Miscellaneous'),
 ]
 
