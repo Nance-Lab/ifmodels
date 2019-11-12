@@ -13,7 +13,6 @@ import pandas as pd
 from skimage import io
 import cv2
 from skimage import filters
-import pandas as pd
 import matplotlib.pyplot as plt
 
 
@@ -48,10 +47,6 @@ def image_cleaning(binary):
     yrange=int(imagey/10)
     xfull=imagex
     yfull=imagey
-
-    #binary[(xfull-xrange):xfull , 0:1000] = False
-    #binary[(xfull-xrange):xfull , 0:yfull] = False
-    #binary[0:xfull, (yfull-yrange):yfull] = False
 
     return binary
 
