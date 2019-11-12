@@ -28,7 +28,7 @@ CLASSIFIERS = ["Development Status :: 3 - Alpha",
 # Description should be a one-liner:
 description = "ifmodels: a package for creating models from immunofluorescent neural images"
 # Long description will go up on the pypi page
-long_description = "A package for creating 2D and 3D immunofluorescent models of neural tissue. The package involves registering slices to a universal atlas, calculating homology scores, and building interactive models "
+long_description = """
 
 IFModels
 ========
