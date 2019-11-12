@@ -71,5 +71,5 @@ MINOR = _version_minor
 MICRO = _version_micro
 VERSION = __version__
 PACKAGE_DATA = {'ifmodels': [pjoin('data', '*')]}
-REQUIRES = ['numpy', 'Pillow', 'cv2', 'nibabel', 'pynrrd', 'pandas', 'skimage', 'matplotlib']
+REQUIRES = ['numpy', 'Pillow', 'nibabel', 'pynrrd', 'pandas', 'matplotlib']
 PYTHON_REQUIRES = ">= 3.5"
