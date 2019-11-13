@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import scipy.optimize as opt
 from scipy.special import erf
-from ifmodels.duecredit import due, Doi
+from .due import due, Doi
 
 __all__ = ["Model", "Fit", "opt_err_func", "transform_data", "cumgauss"]
 
