@@ -47,20 +47,20 @@ def im_read(file_name):
 
 def mim_edge_detector(max_ip):
     """
-    Function that performs the edge detection to get registration points 
+    Function that performs the edge detection to get registration points for moving
+    iamges.
 
     Parameters
     ----------
-    file_name: string
-        The actual name of the file that is being accessed. 
+    max_ip: array
+        The maximum intensity projection of an immunofluorescent slice image.
 
     Returns
     -------
-    im_max: array
+    binary: array
         The maximum intensity projection of the read image. 
     
     """
-    #Performs the edge detection to get registration points for the moving Image
     gauss = filters.gaussian(max_ip, sigma=11, output=None, mode='nearest', cval=0, 
                              multichannel=None, preserve_range=False, truncate=4.0)
     edge_sobel = filters.sobel(gauss)
@@ -69,6 +69,21 @@ def mim_edge_detector(max_ip):
     return binary
 
 def image_cleaning(binary):
+    """
+    A function that cleans up the image by removing small artifacts caused by 
+    methodology.
+
+    Parameters
+    ----------
+    max_ip: array
+        The maximum intensity projection of an immunofluorescent slice image.
+
+    Returns
+    -------
+    binary: array
+        The maximum intensity projection of the read image. 
+    
+    """
     #Cleans up the image
     binary = remove_small_objects(binary, min_size=3000, connectivity=1, in_place=True)
     imagex,imagey = binary.shape
