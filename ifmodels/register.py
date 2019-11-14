@@ -84,7 +84,6 @@ def image_cleaning(binary):
         The maximum intensity projection of the read image. 
     
     """
-    #Cleans up the image
     binary = remove_small_objects(binary, min_size=3000, connectivity=1, in_place=True)
     imagex,imagey = binary.shape
     xrange=int(imagex/10)
@@ -95,16 +94,52 @@ def image_cleaning(binary):
     return binary
 
 def atlas_slice(atlas, slice_number):
-#Importing the proper atlas slice for registration
+    """
+    A function that pulls the data for a specific atlas slice.
+
+    Parameters
+    ----------
+    atlas: nrrd
+        Atlas segmentation file that has a stack of slices.
+
+    slice_number: int
+        The number in the slice that corresponds to the fixed image for registration.
+        
+    Returns
+    -------
+    sagittal: array
+        Sagittal view being pulled from the atlas.
+        
+    coronal: array
+        Coronal view being pulled from the atlas.
+        
+    horizontal: arrary
+        Horizontal view being pulled from the atlas. 
+    """
     epi_img_data2 = atlas.get_fdata()
     sagittal = epi_img_data2[140, :, : ]
     coronal = epi_img_data2[:, slice_number, :]
     horizontal = epi_img_data2[:, : , 100]
     return sagittal, coronal, horizontal
 
-#from: https://nipy.org/nibabel/coordinate_systems.html
 def show_slices(slices):
-#Allows for slicecs from .nii files to be viewed
+    """
+    A function that allows for slices from .nii files to be viewed.
+
+    Parameters
+    ----------
+    slices: tuples
+        Tuple of coronal, sagittal, and horizontal slices you want to view
+        
+    Returns
+    -------
+    N/A: This is specifically a visualization step
+    
+    Notes
+    -------
+    From: #from: https://nipy.org/nibabel/coordinate_systems.html
+    
+    """
     fig,axes = plt.subplots(1, len(slices))
     for i, slice in enumerate(slices):
         axes[i].imshow(slice.T, cmap='gray', origin='lower')
@@ -241,7 +276,8 @@ def reg_coefficients(df, point1, point2, point3):
     row1 = point1-1
     row2 = point2-1
     row3 = point3-1
-    X = np.array([[df.iloc[row1][0], df.iloc[row1][1], 1], [df.iloc[row2][0], df.iloc[row2][1], 1], [df.iloc[row3][0], df.iloc[row3][1], 1]])
+    X = np.array([[df.iloc[row1][0], df.iloc[row1][1], 1], [df.iloc[row2][0], df.iloc[row2][1], 1], 
+                  [df.iloc[row3][0], df.iloc[row3][1], 1]])
     X_prime = np.array([df.iloc[row1][2], df.iloc[row2][2], df.iloc[row3][2]])
     Y_prime =  np.array([df.iloc[row1][3], df.iloc[row2][3], df.iloc[row3][3]])
     a,b,c = np.linalg.solve(X, X_prime)
@@ -261,7 +297,8 @@ def registration(image, coefficients):
     invf = coefficients[1][2]
     im = Image.fromarray(image)
     atlas_size = (3200, 4280)
-    im12 = im.transform(atlas_size, Image.AFFINE, (inva, invb, invc, invd, inve, invf), resample=Image.NEAREST)
+    im12 = im.transform(atlas_size, Image.AFFINE, (inva, invb, invc, invd, inve, invf), 
+                        resample=Image.NEAREST)
     registered_im = np.array(im12)
 
     return registered_im
