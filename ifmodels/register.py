@@ -172,17 +172,16 @@ def nrrd_to_nii(file):
 
 def atlas_edge_detection(image):
     """
-    A function that converts the .nrrd atlas to .nii file format
+    A function that detects the edges of the atlas function
 
     Parameters
     ----------
-    file: tuples
-        Tuple of coronal, sagittal, and horizontal slices you want to view
+    image: array
+        Array that depicts that specific atlas slice being used as a fixed image.
         
     Returns
     -------
-    F_im_nii: nibabel.nifti2.Nifti2Image
-        A nifti file format that is used by various medical imaging techniques.
+    binary: 
     
     Notes
     -------
