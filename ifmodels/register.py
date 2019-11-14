@@ -26,7 +26,21 @@ from skimage.color import label2rgb
 from skimage.transform import rescale, resize
 
 def im_read(file_name):
-    #Reads the image into the jupyter notebook and then gets the max intensity projection
+    """
+    Function that reads the image into a Jupyter Notebook and gets the max intensity
+    projection.
+
+    Parameters
+    ----------
+    file_name: string
+        The actual name of the file that is being accessed. 
+
+    Returns
+    -------
+    im_max: array
+        The maximum intensity projection of the read image. 
+    
+    """
     im = io.imread(file_name)
     im_max = np.max(im, axis=0)
     return im_max

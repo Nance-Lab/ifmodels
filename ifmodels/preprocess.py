@@ -11,12 +11,13 @@ def resize (fixed_image, scale_percent):
     fixed_image: array
         The atlas image of the slice that will be used for fixed registration coordinates.
     
-    scale_percent: 
-        
+    scale_percent: int
+        The percentage of inflating the fixed image so that it is closer in size to moving image.
 
     Returns
     -------
-    resized: 
+    resized: array
+        The resized atlas slice.
     
     """
     F_im = fixed_image.astype(np.uint16)
