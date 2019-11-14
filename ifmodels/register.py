@@ -33,7 +33,8 @@ def im_read(file_name):
 
 def mim_edge_detector(max_ip):
     #Performs the edge detection to get registration points for the moving Image
-    gauss = filters.gaussian(max_ip, sigma=11, output=None, mode='nearest', cval=0, multichannel=None, preserve_range=False, truncate=4.0)
+    gauss = filters.gaussian(max_ip, sigma=11, output=None, mode='nearest', cval=0, 
+                             multichannel=None, preserve_range=False, truncate=4.0)
     edge_sobel = filters.sobel(gauss)
     threshold = filters.threshold_otsu(edge_sobel)
     binary = edge_sobel > threshold
@@ -76,7 +77,8 @@ def nrrd_to_nii(file):
 
 def atlas_edge_detection(image):
 #Detecting the edges of the atlas image
-    gauss = filters.gaussian(resized, sigma=11, output=None, mode='nearest', cval=0, multichannel=None, preserve_range=False, truncate=4.0)
+    gauss = filters.gaussian(resized, sigma=11, output=None, mode='nearest', cval=0, 
+                             multichannel=None, preserve_range=False, truncate=4.0)
     edge_sobel = filters.sobel(gauss)
     threshold = filters.threshold_otsu(edge_sobel)
     binary = edge_sobel > threshold

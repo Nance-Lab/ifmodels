@@ -8,21 +8,16 @@ def resize (fixed_image, scale_percent):
 
     Parameters
     ----------
-    fixed_image: 
-        If this is a DataFrame, it should have the columns `contrast1` and
-        `answer` from which the dependent and independent variables will be
-        extracted. If this is a string, it should be the full path to a csv
-        file that contains data that can be read into a DataFrame with this
-        specification.
+    fixed_image: array
+        The atlas image of the slice that will be used for fixed registration coordinates.
+    
+    scale_percent: 
+        
 
     Returns
     -------
-    x : array
-        The unique contrast differences.
-    y : array
-        The proportion of '2' answers in each contrast difference
-    n : array
-        The number of trials in each x,y condition
+    resized: 
+    
     """
     F_im = fixed_image.astype(np.uint16)
     width = int(F_im.shape[1] * scale_percent)
