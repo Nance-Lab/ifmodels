@@ -146,7 +146,24 @@ def show_slices(slices):
     return
 
 def nrrd_to_nii(file):
-#Converting the .nrrd atlas to a .nii file format
+    """
+    A function that converts the .nrrd atlas to .nii file format
+
+    Parameters
+    ----------
+    file: tuples
+        Tuple of coronal, sagittal, and horizontal slices you want to view
+        
+    Returns
+    -------
+    F_im_nii: nibabel.nifti2.Nifti2Image
+        A nifti file format that is used by various medical imaging techniques.
+    
+    Notes
+    -------
+    From: #from: https://nipy.org/nibabel/coordinate_systems.html
+    
+    """
     _nrrd = nrrd.read(file)
     data = _nrrd[0]
     header = _nrrd[1]
@@ -154,6 +171,24 @@ def nrrd_to_nii(file):
     return F_im_nii
 
 def atlas_edge_detection(image):
+    """
+    A function that converts the .nrrd atlas to .nii file format
+
+    Parameters
+    ----------
+    file: tuples
+        Tuple of coronal, sagittal, and horizontal slices you want to view
+        
+    Returns
+    -------
+    F_im_nii: nibabel.nifti2.Nifti2Image
+        A nifti file format that is used by various medical imaging techniques.
+    
+    Notes
+    -------
+    From: #from: https://nipy.org/nibabel/coordinate_systems.html
+    
+    """
 #Detecting the edges of the atlas image
     gauss = filters.gaussian(resized, sigma=11, output=None, mode='nearest', cval=0, 
                              multichannel=None, preserve_range=False, truncate=4.0)
