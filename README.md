@@ -11,6 +11,8 @@ Ifmodels current state is the beginning of a much larger project with the goal o
 
 ### Installation
 
+Currently doing development install only through TestPyPi.
+
 ## Features
 
 ### API Reference
