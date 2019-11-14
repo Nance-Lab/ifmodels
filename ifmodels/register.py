@@ -46,6 +46,20 @@ def im_read(file_name):
     return im_max
 
 def mim_edge_detector(max_ip):
+    """
+    Function that performs the edge detection to get registration points 
+
+    Parameters
+    ----------
+    file_name: string
+        The actual name of the file that is being accessed. 
+
+    Returns
+    -------
+    im_max: array
+        The maximum intensity projection of the read image. 
+    
+    """
     #Performs the edge detection to get registration points for the moving Image
     gauss = filters.gaussian(max_ip, sigma=11, output=None, mode='nearest', cval=0, 
                              multichannel=None, preserve_range=False, truncate=4.0)
