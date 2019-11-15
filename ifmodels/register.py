@@ -511,8 +511,9 @@ def reg_coefficients(df, point1, point2, point3):
     row1 = point1-1
     row2 = point2-1
     row3 = point3-1
-    X = np.array([[df.iloc[row1][0], df.iloc[row1][1], 1], [df.iloc[row2][0],
-                   df.iloc[row2][1], 1], [df.iloc[row3][0], df.iloc[row3][1], 1]])
+    X = np.array([[df.iloc[row1][0], df.iloc[row1][1], 1],
+                  [df.iloc[row2][0], df.iloc[row2][1], 1],
+                  [df.iloc[row3][0], df.iloc[row3][1], 1]])
     X_prime = np.array([df.iloc[row1][2], df.iloc[row2][2], df.iloc[row3][2]])
     Y_prime = np.array([df.iloc[row1][3], df.iloc[row2][3], df.iloc[row3][3]])
     a, b, c = np.linalg.solve(X, X_prime)
@@ -551,7 +552,8 @@ def registration(image, coefficients):
     im = Image.fromarray(image)
     atlas_size = (3200, 4280)
     im12 = im.transform(atlas_size, Image.AFFINE,
-                        (inva, invb, invc, invd, inve, invf), resample=Image.NEAREST)
+                        (inva, invb, invc, invd, inve, invf),
+                        resample=Image.NEAREST)
     registered_im = np.array(im12)
 
     return registered_im
