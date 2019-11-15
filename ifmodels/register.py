@@ -255,7 +255,7 @@ def point_middle(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-  
+
     Returns
     -------
     midpoint: int
@@ -263,7 +263,7 @@ def point_middle(binary_image):
         of a slice.
 
     """
-    x = x_value(binary_image)
+    # x = x_value(binary_image)
     y = y_values(binary_image)
     middle = np.median(y)
     midpoint = int(middle)
@@ -278,12 +278,12 @@ def local_max(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-  
+
     Returns
     -------
     x: int
         The x coordinate of the local max of curvature.
- 
+
     y: int
         The y coordinate of the local max of curvature.
 
@@ -306,7 +306,7 @@ def minx_value(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-  
+
     Returns
     -------
     x: int
@@ -342,7 +342,7 @@ def miny_values(binary_image):
         image = binary_image[x]
         value = image[y]
         if value == True:
-            y_list.append (y)
+            y_list.append(y)
         else:
             pass
     y_list = np.array(y_list)
@@ -366,7 +366,7 @@ def min_middle(binary_image):
         of the slice.
 
     """
-    x = minx_value(binary_image)
+    # x = minx_value(binary_image)
     y = miny_values(binary_image)
     middle = np.median(y)
     midpoint = int(middle)
@@ -382,12 +382,12 @@ def local_min(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-  
+
     Returns
     -------
     x: int
-        The x location of the min value of the bottom of the slice. 
- 
+        The x location of the min value of the bottom of the slice.
+
     y: int
         The y coordinates of the local maximum curvature at the bottom
         of the slice.
@@ -417,10 +417,10 @@ def find_points(binary_image):
 
     """
     binary_half = np.array_split(binary_image, 2, axis=0)
-    left1=binary_half[0]
-    left1=np.rot90(left1, k=1)
-    left2=binary_half[1]
-    left2=np.rot90(left2,k=1)
+    left1 = binary_half[0]
+    left1 = np.rot90(left1, k=1)
+    left2 = binary_half[1]
+    left2 = np.rot90(left2,k=1)
 
     x1, y1 = local_max(binary_image)
     x4, y4 = local_min(binary_image)
@@ -441,7 +441,7 @@ def find_points(binary_image):
     y6 = (binaryy - sy6)
 
     coor = {'M_x': [x1, x2, x3, x4, x5, x6], 'M_y': [y1, y2, y3, y4, y5, y6]}
-    coor_df = pd.DataFrame(coor, columns = ['M_x', 'M_y'])
+    coor_df = pd.DataFrame(coor, columns=['M_x', 'M_y'])
     return coor_df
 
 
@@ -454,7 +454,7 @@ def red_points(checkx, checky, binary_image, checkpoints):
     ----------
     checkx: int
         x-coordinate of one of the maximum curvature points
-    
+
     checky: int
         y-coordinate of the one of the maxiumum curvature points
 
@@ -473,7 +473,7 @@ def red_points(checkx, checky, binary_image, checkpoints):
     """
     binaryx, binaryy = binary_image.shape
     checkpoints [checkx, checky] = 255
-    kernel = list(range(1,50))
+    kernel = list(range(1, 50))
     xvalues = list(range(checkx - 50, checkx+50))
     for x in xvalues:
         for distances in kernel:
@@ -505,14 +505,14 @@ def reg_coefficients(df, point1, point2, point3):
     -------
     ainv: array
         An array that has the inverse of your coefficients from your
-        affine transformation. 
+        affine transformation.
 
     """
     row1 = point1-1
     row2 = point2-1
     row3 = point3-1
-    X = np.array([[df.iloc[row1][0], df.iloc[row1][1], 1], [df.iloc[row2][0], df.iloc[row2][1], 1], 
-                  [df.iloc[row3][0], df.iloc[row3][1], 1]])
+    X = np.array([[df.iloc[row1][0], df.iloc[row1][1], 1], [df.iloc[row2][0], 
+                   df.iloc[row2][1], 1], [df.iloc[row3][0], df.iloc[row3][1], 1]])
     X_prime = np.array([df.iloc[row1][2], df.iloc[row2][2], df.iloc[row3][2]])
     Y_prime =  np.array([df.iloc[row1][3], df.iloc[row2][3], df.iloc[row3][3]])
     a,b,c = np.linalg.solve(X, X_prime)
