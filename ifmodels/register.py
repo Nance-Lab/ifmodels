@@ -15,7 +15,7 @@ from skimage.morphology import remove_small_objects
 
 def im_read(file_name):
     """
-    Function that reads the image into a Jupyter Notebook and gets the 
+    Function that reads the image into a Jupyter Notebook and gets the
     max intensity projection.
 
     Parameters
@@ -27,7 +27,7 @@ def im_read(file_name):
     -------
     im_max: array
         The maximum intensity projection of the read image.
-    
+
     """
     im = io.imread(file_name)
     im_max = np.max(im, axis=0)
@@ -36,8 +36,8 @@ def im_read(file_name):
 
 def mim_edge_detector(max_ip):
     """
-    Function that performs the edge detection to get registration points for moving
-    iamges.
+    Function that performs the edge detection to get registration points
+    for moving images.
 
     Parameters
     ----------
@@ -47,11 +47,12 @@ def mim_edge_detector(max_ip):
     Returns
     -------
     binary: array
-        The maximum intensity projection of the read image. 
-    
+        The maximum intensity projection of the read image.
+
     """
-    gauss = filters.gaussian(max_ip, sigma=11, output=None, mode='nearest', cval=0, 
-                             multichannel=None, preserve_range=False, truncate=4.0)
+    gauss = filters.gaussian(max_ip, sigma=11, output=None, mode='nearest', 
+                             cval=0, multichannel=None, preserve_range=False,
+                             truncate=4.0)
     edge_sobel = filters.sobel(gauss)
     threshold = filters.threshold_otsu(edge_sobel)
     binary = edge_sobel > threshold
