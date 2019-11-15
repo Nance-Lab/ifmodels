@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 
 # Skimage imports
-from skimage.morphology import  closing, square, remove_small_objects
+from skimage.morphology import remove_small_objects
 from skimage.color import label2rgb
 
 def im_read(file_name):
