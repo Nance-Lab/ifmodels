@@ -184,8 +184,9 @@ def atlas_edge_detection(image):
         The array depicting the specific atlas as a boolean.
 
     """
-    gauss = filters.gaussian(image, sigma=11, output=None, mode='nearest', cval=0, 
-                             multichannel=None, preserve_range=False, truncate=4.0)
+    gauss = filters.gaussian(image, sigma=11, output=None, mode='nearest',
+                             cval=0, multichannel=None,
+                             preserve_range=False, truncate=4.0)
     edge_sobel = filters.sobel(gauss)
     threshold = filters.threshold_otsu(edge_sobel)
     binary = edge_sobel > threshold
