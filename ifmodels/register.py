@@ -96,7 +96,7 @@ def atlas_slice(atlas, slice_number):
         Atlas segmentation file that has a stack of slices.
 
     slice_number: int
-        The number in the slice that corresponds to the fixed image 
+        The number in the slice that corresponds to the fixed image
         for registration.
 
     Returns
@@ -112,9 +112,9 @@ def atlas_slice(atlas, slice_number):
 
     """
     epi_img_data2 = atlas.get_fdata()
-    sagittal = epi_img_data2[140, :, : ]
+    sagittal = epi_img_data2[140, :, :]
     coronal = epi_img_data2[:, slice_number, :]
-    horizontal = epi_img_data2[:, : , 100]
+    horizontal = epi_img_data2[:, :, 100]
     return sagittal, coronal, horizontal
 
 
@@ -136,7 +136,7 @@ def show_slices(slices):
     From: #from: https://nipy.org/nibabel/coordinate_systems.html
 
     """
-    fig,axes = plt.subplots(1, len(slices))
+    fig, axes = plt.subplots(1, len(slices))
     for i, slice in enumerate(slices):
         axes[i].imshow(slice.T, cmap='gray', origin='lower')
     return
@@ -150,7 +150,7 @@ def nrrd_to_nii(file):
     ----------
     file: tuples
         Tuple of coronal, sagittal, and horizontal slices you want to view
- 
+
     Returns
     -------
     F_im_nii: nibabel.nifti2.Nifti2Image
@@ -163,7 +163,7 @@ def nrrd_to_nii(file):
     """
     _nrrd = nrrd.read(file)
     data = _nrrd[0]
-    header = _nrrd[1]
+    header = _nrrd[1] # noqa: F841
     F_im_nii = nib.Nifti2Image(data,np.eye(4))
     return F_im_nii
 
