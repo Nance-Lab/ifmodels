@@ -12,25 +12,27 @@ import matplotlib.pyplot as plt
 # Skimage imports
 from skimage.morphology import remove_small_objects
 
+
 def im_read(file_name):
     """
-    Function that reads the image into a Jupyter Notebook and gets the max intensity
-    projection.
+    Function that reads the image into a Jupyter Notebook and gets the 
+    max intensity projection.
 
     Parameters
     ----------
     file_name: string
-        The actual name of the file that is being accessed. 
+        The actual name of the file that is being accessed.
 
     Returns
     -------
     im_max: array
-        The maximum intensity projection of the read image. 
+        The maximum intensity projection of the read image.
     
     """
     im = io.imread(file_name)
     im_max = np.max(im, axis=0)
     return im_max
+
 
 def mim_edge_detector(max_ip):
     """
