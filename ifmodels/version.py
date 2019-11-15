@@ -26,7 +26,7 @@ CLASSIFIERS = ["Development Status :: 3 - Alpha",
                "Topic :: Scientific/Engineering"]
 
 # Description should be a one-liner:
-description = "ifmodels: a package for creating models from immunofluorescent images"
+description = "ifmodels: a package that creates models of immunofluorescent images"
 # Long description will go up on the pypi page
 long_description = """
 
@@ -34,10 +34,10 @@ IFModels
 ========
 IFmodels is a package for creating immunofluorescent neural models.
 
-It contains software implementations for registrion of 
-immunofluorescnet neural slices, but more importantly, it contains 
-infrastructure for developing 2D and 3D models from sets of neural 
-slices and 3D visualization which can easily be adapted to use in 
+It contains software implementations for registrion of
+immunofluorescnet neural slices, but more importantly, it contains
+infrastructure for developing 2D and 3D models from sets of neural
+slices and 3D visualization which can easily be adapted to use in
 other species, ages, microscopes, and disease models.
 
 To get started using these components in your own software, please go to the
@@ -53,7 +53,8 @@ for usage, and a DISCLAIMER OF ALL WARRANTIES.
 
 All trademarks referenced herein are property of their respective holders.
 
-Copyright (c) 2019--, Hawley Helmbrecht, Nance Lab, The University of Washington
+Copyright (c) 2019--, Hawley Helmbrecht, Nance Lab,
+The University of Washington
 Department of Chemical Engineering.
 """
 
