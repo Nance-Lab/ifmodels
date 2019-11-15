@@ -1,22 +1,15 @@
-# operating system dependent functionality
-import os
-
-#allows for all the pathnames of a specified pattern to be located
-from glob import glob
-
-#Package imports
+# Package imports
 import numpy as np
 from PIL import Image
 import nibabel as nib
 import nrrd
 import pandas as pd
 from skimage import io
-import cv2
 from skimage import filters
 import matplotlib.pyplot as plt
 
 
-#Skimage imports
+# Skimage imports
 from skimage import io
 from skimage import filters
 from skimage.segmentation import clear_border
