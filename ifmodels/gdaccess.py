@@ -1,10 +1,6 @@
 from apiclient import discovery
 from httplib2 import Http
-import oauth2client
-from oauth2client import file, client, tools
-import pandas as pd
-import nrrd
-import nibabel as nib
+from oauth2client import file
 import io
 from googleapiclient.http import MediaIoBaseDownload
 
