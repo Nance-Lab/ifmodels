@@ -50,13 +50,14 @@ def mim_edge_detector(max_ip):
         The maximum intensity projection of the read image.
 
     """
-    gauss = filters.gaussian(max_ip, sigma=11, output=None, mode='nearest', 
+    gauss = filters.gaussian(max_ip, sigma=11, output=None, mode='nearest',
                              cval=0, multichannel=None, preserve_range=False,
                              truncate=4.0)
     edge_sobel = filters.sobel(gauss)
     threshold = filters.threshold_otsu(edge_sobel)
     binary = edge_sobel > threshold
     return binary
+
 
 def image_cleaning(binary):
     """
@@ -82,6 +83,7 @@ def image_cleaning(binary):
     yfull=imagey
 
     return binary
+
 
 def atlas_slice(atlas, slice_number):
     """
@@ -112,6 +114,7 @@ def atlas_slice(atlas, slice_number):
     horizontal = epi_img_data2[:, : , 100]
     return sagittal, coronal, horizontal
 
+
 def show_slices(slices):
     """
     A function that allows for slices from .nii files to be viewed.
@@ -134,6 +137,7 @@ def show_slices(slices):
     for i, slice in enumerate(slices):
         axes[i].imshow(slice.T, cmap='gray', origin='lower')
     return
+
 
 def nrrd_to_nii(file):
     """
@@ -159,6 +163,7 @@ def nrrd_to_nii(file):
     header = _nrrd[1]
     F_im_nii = nib.Nifti2Image(data,np.eye(4))
     return F_im_nii
+
 
 def atlas_edge_detection(image):
     """
@@ -204,6 +209,7 @@ def x_value(binary_image):
             break
     return x
 
+
 def y_values(binary_image):
     """
     A function that finds the y-value of the relative maxium at the top of a slice
@@ -231,6 +237,7 @@ def y_values(binary_image):
     y_list = np.array(y_list)
     return y_list
 
+
 def point_middle(binary_image):
     """
     A function that finds the middle point if the maximum value row has more than one true
@@ -252,6 +259,7 @@ def point_middle(binary_image):
     middle = np.median(y)
     midpoint = int(middle)
     return midpoint
+
 
 def local_max(binary_image):
     """
@@ -278,6 +286,7 @@ def local_max(binary_image):
     y = point_middle(binary_image)
     return x, y
 
+
 def minx_value(binary_image):
     """
     A function that finds the relative max of the bottom of a slice.
@@ -298,6 +307,7 @@ def minx_value(binary_image):
         if unique_array.shape[0] == 2:
             break
     return x
+
 
 def miny_values(binary_image):
     """
@@ -325,6 +335,7 @@ def miny_values(binary_image):
     y_list = np.array(y_list)
     return y_list
 
+
 def min_middle(binary_image):
     """
     A function that finds the middle point of the relative max of the bottom of a slice.
@@ -344,6 +355,7 @@ def min_middle(binary_image):
     middle = np.median(y)
     midpoint = int(middle)
     return midpoint
+
 
 def local_min(binary_image):
     """
@@ -365,6 +377,7 @@ def local_min(binary_image):
     x = minx_value(binary_image)
     y = min_middle(binary_image)
     return x, y
+
 
 def find_points(binary_image):
     """
@@ -409,6 +422,7 @@ def find_points(binary_image):
     coor_df = pd.DataFrame(coor, columns = ['M_x', 'M_y'])
     return coor_df
 
+
 def red_points(checkx, checky, binary_image, checkpoints):
     """
     A function that allows for better user visualization of the registration points.
@@ -440,6 +454,7 @@ def red_points(checkx, checky, binary_image, checkpoints):
         for distances in kernel:
             checkpoints[x, (checky - distances):(checky+distances), 0:1] = 255
     return checkpoints
+
 
 def reg_coefficients(df, point1, point2, point3):
     """
@@ -479,6 +494,7 @@ def reg_coefficients(df, point1, point2, point3):
     ainv = np.linalg.inv(ax)
 
     return ainv
+
 
 def registration(image, coefficients):
     """
