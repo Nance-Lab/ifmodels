@@ -96,16 +96,17 @@ def atlas_slice(atlas, slice_number):
         Atlas segmentation file that has a stack of slices.
 
     slice_number: int
-        The number in the slice that corresponds to the fixed image for registration.
-        
+        The number in the slice that corresponds to the fixed image 
+        for registration.
+
     Returns
     -------
     sagittal: array
         Sagittal view being pulled from the atlas.
-        
+
     coronal: array
         Coronal view being pulled from the atlas.
-        
+
     horizontal: arrary
         Horizontal view being pulled from the atlas.
 
@@ -125,11 +126,11 @@ def show_slices(slices):
     ----------
     slices: tuples
         Tuple of coronal, sagittal, and horizontal slices you want to view
-        
+
     Returns
     -------
     N/A: This is specifically a visualization step
-    
+
     Notes
     -------
     From: #from: https://nipy.org/nibabel/coordinate_systems.html
@@ -149,16 +150,16 @@ def nrrd_to_nii(file):
     ----------
     file: tuples
         Tuple of coronal, sagittal, and horizontal slices you want to view
-        
+ 
     Returns
     -------
     F_im_nii: nibabel.nifti2.Nifti2Image
         A nifti file format that is used by various medical imaging techniques.
-    
+
     Notes
     -------
     From: #from: https://nipy.org/nibabel/coordinate_systems.html
-    
+
     """
     _nrrd = nrrd.read(file)
     data = _nrrd[0]
@@ -175,7 +176,7 @@ def atlas_edge_detection(image):
     ----------
     image: array
         Array that depicts that specific atlas slice being used as a fixed image.
-        
+ 
     Returns
     -------
     binary: array
@@ -198,7 +199,7 @@ def x_value(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean.
-        
+  
     Returns
     -------
     x: int
@@ -220,7 +221,7 @@ def y_values(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-        
+   
     Returns
     -------
     y_list: list
@@ -249,7 +250,7 @@ def point_middle(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-        
+  
     Returns
     -------
     midpoint: int
@@ -271,15 +272,15 @@ def local_max(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-        
+  
     Returns
     -------
     x: int
         The x coordinate of the local max of curvature.
-        
+ 
     y: int
         The y coordinate of the local max of curvature.
-    
+
     Notes
     -------
     Utilizes the above equations to find very close to the actual maximum of curvature.
@@ -298,7 +299,7 @@ def minx_value(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-        
+  
     Returns
     -------
     x: int
@@ -321,7 +322,7 @@ def miny_values(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-        
+
     Returns
     -------
     y_list: list
@@ -349,7 +350,7 @@ def min_middle(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-        
+
     Returns
     -------
     midpoint: int
@@ -371,12 +372,12 @@ def local_min(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-        
+  
     Returns
     -------
     x: int
         The x location of the min value of the bottom of the slice. 
-        
+ 
     y: int
         The y coordinates of the local maximum curvature at the bottom of the slice.
 
@@ -395,7 +396,7 @@ def find_points(binary_image):
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-        
+
     Returns
     -------
     coor_df: pandas dataframe
@@ -442,10 +443,10 @@ def red_points(checkx, checky, binary_image, checkpoints):
     
     checky: int
         y-coordinate of the one of the maxiumum curvature points
-        
+
     binary_image: boolean array
         Array that depicts the slice as a boolean array
-    
+
     checkpoints: array
         An array of zeros the size of the fixed image that will be filled with values.
 
@@ -474,13 +475,13 @@ def reg_coefficients(df, point1, point2, point3):
     df: pandas dataframe
         Empty dataframe to store all of the coefficients with columns 'coor_df' and
         'fim_coor_df'
-    
+
     point1: int
         Registration label of your first point of choice.
-        
+
     point2: int
         Registration label of your second point of choice.
-    
+
     point3: int
         Registration label of yoru third point of choice.
 
