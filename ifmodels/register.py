@@ -10,10 +10,8 @@ import matplotlib.pyplot as plt
 
 
 # Skimage imports
-from skimage.measure import label, regionprops
 from skimage.morphology import  closing, square, remove_small_objects
 from skimage.color import label2rgb
-from skimage.transform import rescale, resize
 
 def im_read(file_name):
     """
