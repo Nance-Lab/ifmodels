@@ -163,8 +163,8 @@ def nrrd_to_nii(file):
     """
     _nrrd = nrrd.read(file)
     data = _nrrd[0]
-    header = _nrrd[1] # noqa: F841
-    F_im_nii = nib.Nifti2Image(data,np.eye(4))
+    header = _nrrd[1]  # noqa: F841
+    F_im_nii = nib.Nifti2Image(data, np.eye(4))
     return F_im_nii
 
 
@@ -175,8 +175,9 @@ def atlas_edge_detection(image):
     Parameters
     ----------
     image: array
-        Array that depicts that specific atlas slice being used as a fixed image.
- 
+        Array that depicts that specific atlas slice being used as a 
+        fixed image.
+
     Returns
     -------
     binary: array
