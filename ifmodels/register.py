@@ -61,7 +61,7 @@ def mim_edge_detector(max_ip):
 
 def image_cleaning(binary):
     """
-    A function that cleans up the image by removing small artifacts caused by 
+    A function that cleans up the image by removing small artifacts caused by
     methodology.
 
     Parameters
@@ -72,8 +72,8 @@ def image_cleaning(binary):
     Returns
     -------
     binary: array
-        The maximum intensity projection of the read image. 
-    
+        The maximum intensity projection of the read image.
+
     """
     binary = remove_small_objects(binary, min_size=3000, connectivity=1, in_place=True)
     imagex,imagey = binary.shape
@@ -106,7 +106,8 @@ def atlas_slice(atlas, slice_number):
         Coronal view being pulled from the atlas.
         
     horizontal: arrary
-        Horizontal view being pulled from the atlas. 
+        Horizontal view being pulled from the atlas.
+
     """
     epi_img_data2 = atlas.get_fdata()
     sagittal = epi_img_data2[140, :, : ]
@@ -131,7 +132,7 @@ def show_slices(slices):
     Notes
     -------
     From: #from: https://nipy.org/nibabel/coordinate_systems.html
-    
+
     """
     fig,axes = plt.subplots(1, len(slices))
     for i, slice in enumerate(slices):
@@ -178,7 +179,7 @@ def atlas_edge_detection(image):
     -------
     binary: array
         The array depicting the specific atlas as a boolean. 
-    
+
     """
     gauss = filters.gaussian(resized, sigma=11, output=None, mode='nearest', cval=0, 
                              multichannel=None, preserve_range=False, truncate=4.0)
@@ -201,7 +202,7 @@ def x_value(binary_image):
     -------
     x: int
         The x-coordinate of the maximum part of the curve.
-    
+
     """
     for x in range(binary_image.shape[0]):
         unique_array = np.unique(binary_image[x], axis=0)
@@ -223,7 +224,7 @@ def y_values(binary_image):
     -------
     y_list: list
         A list of y-values that had a boolean true value
-    
+
     """
     x = x_value(binary_image)
     y_list = []
@@ -252,7 +253,7 @@ def point_middle(binary_image):
     -------
     midpoint: int
         The middle point of a the true values at the maximum curvature of a slice.
-    
+
     """
     x = x_value(binary_image)
     y = y_values(binary_image)
@@ -281,6 +282,7 @@ def local_max(binary_image):
     Notes
     -------
     Utilizes the above equations to find very close to the actual maximum of curvature.
+
     """
     x = x_value(binary_image)
     y = point_middle(binary_image)
@@ -300,6 +302,7 @@ def minx_value(binary_image):
     -------
     x: int
         The x coordinate of the local max of curvature.
+
     """
     xlist = reversed(range(binary_image.shape[0]))
     for x in xlist:
@@ -321,7 +324,8 @@ def miny_values(binary_image):
     Returns
     -------
     y_list: list
-        The list of y-coordinates of the local maximum with true values. 
+        The list of y-coordinates of the local maximum with true values.
+
     """
     x = minx_value(binary_image)
     y_list = []
@@ -348,7 +352,8 @@ def min_middle(binary_image):
     Returns
     -------
     midpoint: int
-        The middle value location of the min value of the bottom of the slice. 
+        The middle value location of the min value of the bottom of the slice.
+
     """
     x = minx_value(binary_image)
     y = miny_values(binary_image)
@@ -373,6 +378,7 @@ def local_min(binary_image):
         
     y: int
         The y coordinates of the local maximum curvature at the bottom of the slice.
+
     """
     x = minx_value(binary_image)
     y = min_middle(binary_image)
@@ -392,7 +398,8 @@ def find_points(binary_image):
     Returns
     -------
     coor_df: pandas dataframe
-        A pandas dataframe with the x and y coordinates of all six local max curvatures. 
+        A pandas dataframe with the x and y coordinates of all six local max curvatures.
+
     """
     binary_half = np.array_split(binary_image, 2, axis=0)
     left1=binary_half[0]
@@ -440,11 +447,12 @@ def red_points(checkx, checky, binary_image, checkpoints):
     
     checkpoints: array
         An array of zeros the size of the fixed image that will be filled with values.
-        
+
     Returns
     -------
     coor_df: checkpoints
-        The input array with areas marked for the registration points. 
+        The input array with areas marked for the registration points.
+
     """
     binaryx, binaryy = binary_image.shape
     checkpoints [checkx, checky] = 255
@@ -474,12 +482,12 @@ def reg_coefficients(df, point1, point2, point3):
     
     point3: int
         Registration label of yoru third point of choice.
-        
+
     Returns
     -------
     ainv: array
         An array that has the inverse of your coefficients from your affien transformation. 
-    
+
     """
     row1 = point1-1
     row2 = point2-1
@@ -507,12 +515,12 @@ def registration(image, coefficients):
 
     coefficients: array
         The array that contains the inverse coefficient for the registration.
-        
+
     Returns
     -------
     registered_im: array
         An array that contains the registered image. 
-    
+
     """
     #Performing the tranformation
     inva = coefficients[0][0]
