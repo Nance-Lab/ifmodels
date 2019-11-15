@@ -14,8 +14,8 @@ def resize(fixed_image, scale_percent):
         registration coordinates.
 
     scale_percent: int
-        The percentage of inflating the fixed image so that it is closer in size
-        to moving image.
+        The percentage of inflating the fixed image so that it is closer
+        in size to moving image.
 
     Returns
     -------
@@ -27,5 +27,5 @@ def resize(fixed_image, scale_percent):
     width = int(F_im.shape[1] * scale_percent)
     height = int(F_im.shape[0] * scale_percent)
     dim = (width, height)
-    resized = cv2.resize(F_im, dim, interpolation = cv2.INTER_AREA)
+    resized = cv2.resize(F_im, dim, interpolation=cv2.INTER_AREA)
     return resized
