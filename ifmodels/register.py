@@ -10,9 +10,6 @@ import matplotlib.pyplot as plt
 
 
 # Skimage imports
-from skimage import io
-from skimage import filters
-from skimage.segmentation import clear_border
 from skimage.measure import label, regionprops
 from skimage.morphology import  closing, square, remove_small_objects
 from skimage.color import label2rgb
