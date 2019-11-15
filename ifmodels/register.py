@@ -420,7 +420,7 @@ def find_points(binary_image):
     left1 = binary_half[0]
     left1 = np.rot90(left1, k=1)
     left2 = binary_half[1]
-    left2 = np.rot90(left2,k=1)
+    left2 = np.rot90(left2, k=1)
 
     x1, y1 = local_max(binary_image)
     x4, y4 = local_min(binary_image)
@@ -472,7 +472,7 @@ def red_points(checkx, checky, binary_image, checkpoints):
 
     """
     binaryx, binaryy = binary_image.shape
-    checkpoints [checkx, checky] = 255
+    checkpoints[checkx, checky] = 255
     kernel = list(range(1, 50))
     xvalues = list(range(checkx - 50, checkx+50))
     for x in xvalues:
@@ -511,12 +511,12 @@ def reg_coefficients(df, point1, point2, point3):
     row1 = point1-1
     row2 = point2-1
     row3 = point3-1
-    X = np.array([[df.iloc[row1][0], df.iloc[row1][1], 1], [df.iloc[row2][0], 
+    X = np.array([[df.iloc[row1][0], df.iloc[row1][1], 1], [df.iloc[row2][0],
                    df.iloc[row2][1], 1], [df.iloc[row3][0], df.iloc[row3][1], 1]])
     X_prime = np.array([df.iloc[row1][2], df.iloc[row2][2], df.iloc[row3][2]])
-    Y_prime =  np.array([df.iloc[row1][3], df.iloc[row2][3], df.iloc[row3][3]])
-    a,b,c = np.linalg.solve(X, X_prime)
-    d,e,f = np.linalg.solve(X,Y_prime)
+    Y_prime = np.array([df.iloc[row1][3], df.iloc[row2][3], df.iloc[row3][3]])
+    a, b, c = np.linalg.solve(X, X_prime)
+    d, e, f = np.linalg.solve(X, Y_prime)
     ax = np.array([[a, b, c], [d, e, f], [0, 0, 1]])
     ainv = np.linalg.inv(ax)
 
@@ -538,10 +538,10 @@ def registration(image, coefficients):
     Returns
     -------
     registered_im: array
-        An array that contains the registered image. 
+        An array that contains the registered image.
 
     """
-    #Performing the tranformation
+    # Performing the tranformation
     inva = coefficients[0][0]
     invb = coefficients[0][1]
     invc = coefficients[0][2]
@@ -550,8 +550,8 @@ def registration(image, coefficients):
     invf = coefficients[1][2]
     im = Image.fromarray(image)
     atlas_size = (3200, 4280)
-    im12 = im.transform(atlas_size, Image.AFFINE, (inva, invb, invc, invd, inve, invf), 
-                        resample=Image.NEAREST)
+    im12 = im.transform(atlas_size, Image.AFFINE,
+                        (inva, invb, invc, invd, inve, invf), resample=Image.NEAREST)
     registered_im = np.array(im12)
 
     return registered_im
