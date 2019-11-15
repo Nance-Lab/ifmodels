@@ -195,13 +195,14 @@ def atlas_edge_detection(image):
 
 def x_value(binary_image):
     """
-    A function that finds the x-value of the relative maxium at the top of a slice
+    A function that finds the x-value of the relative maxium at the
+    top of a slice
 
     Parameters
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean.
-  
+
     Returns
     -------
     x: int
@@ -217,13 +218,14 @@ def x_value(binary_image):
 
 def y_values(binary_image):
     """
-    A function that finds the y-value of the relative maxium at the top of a slice
+    A function that finds the y-value of the relative maxium at the top
+    of a slice
 
     Parameters
     ----------
     binary_image: boolean array
         Array that depicts the slice as a boolean
-   
+
     Returns
     -------
     y_list: list
@@ -236,7 +238,7 @@ def y_values(binary_image):
         image = binary_image[x]
         value = image[y]
         if value == True:
-            y_list.append (y)
+            y_list.append(y)
         else:
             pass
     y_list = np.array(y_list)
@@ -245,7 +247,8 @@ def y_values(binary_image):
 
 def point_middle(binary_image):
     """
-    A function that finds the middle point if the maximum value row has more than one true
+    A function that finds the middle point if the maximum value row has
+    more than one true
     pixel.
 
     Parameters
@@ -256,7 +259,8 @@ def point_middle(binary_image):
     Returns
     -------
     midpoint: int
-        The middle point of a the true values at the maximum curvature of a slice.
+        The middle point of a the true values at the maximum curvature
+        of a slice.
 
     """
     x = x_value(binary_image)
@@ -285,7 +289,8 @@ def local_max(binary_image):
 
     Notes
     -------
-    Utilizes the above equations to find very close to the actual maximum of curvature.
+    Utilizes the above equations to find very close to the actual
+    maximum of curvature.
 
     """
     x = x_value(binary_image)
@@ -346,7 +351,8 @@ def miny_values(binary_image):
 
 def min_middle(binary_image):
     """
-    A function that finds the middle point of the relative max of the bottom of a slice.
+    A function that finds the middle point of the relative max of the
+    bottom of a slice.
 
     Parameters
     ----------
@@ -356,7 +362,8 @@ def min_middle(binary_image):
     Returns
     -------
     midpoint: int
-        The middle value location of the min value of the bottom of the slice.
+        The middle value location of the min value of the bottom
+        of the slice.
 
     """
     x = minx_value(binary_image)
@@ -368,7 +375,8 @@ def min_middle(binary_image):
 
 def local_min(binary_image):
     """
-    A function that finds the x and y coordinates of the relative max of the bottom of a slice.
+    A function that finds the x and y coordinates of the relative max of
+    the bottom of a slice.
 
     Parameters
     ----------
@@ -381,7 +389,8 @@ def local_min(binary_image):
         The x location of the min value of the bottom of the slice. 
  
     y: int
-        The y coordinates of the local maximum curvature at the bottom of the slice.
+        The y coordinates of the local maximum curvature at the bottom
+        of the slice.
 
     """
     x = minx_value(binary_image)
@@ -391,7 +400,8 @@ def local_min(binary_image):
 
 def find_points(binary_image):
     """
-    A function that finds all of the x,y registration coordinates for six curvatures
+    A function that finds all of the x,y registration coordinates for
+    six curvatures
     on full brain slices.
 
     Parameters
@@ -402,7 +412,8 @@ def find_points(binary_image):
     Returns
     -------
     coor_df: pandas dataframe
-        A pandas dataframe with the x and y coordinates of all six local max curvatures.
+        A pandas dataframe with the x and y coordinates of all six local
+        max curvatures.
 
     """
     binary_half = np.array_split(binary_image, 2, axis=0)
@@ -436,7 +447,8 @@ def find_points(binary_image):
 
 def red_points(checkx, checky, binary_image, checkpoints):
     """
-    A function that allows for better user visualization of the registration points.
+    A function that allows for better user visualization of the
+    registration points.
 
     Parameters
     ----------
@@ -450,7 +462,8 @@ def red_points(checkx, checky, binary_image, checkpoints):
         Array that depicts the slice as a boolean array
 
     checkpoints: array
-        An array of zeros the size of the fixed image that will be filled with values.
+        An array of zeros the size of the fixed image that will be
+        filled with values.
 
     Returns
     -------
@@ -470,13 +483,14 @@ def red_points(checkx, checky, binary_image, checkpoints):
 
 def reg_coefficients(df, point1, point2, point3):
     """
-    A function that gets the registration coefficients for the affine transformation.
+    A function that gets the registration coefficients for the
+    affine transformation.
 
     Parameters
     ----------
     df: pandas dataframe
-        Empty dataframe to store all of the coefficients with columns 'coor_df' and
-        'fim_coor_df'
+        Empty dataframe to store all of the coefficients with columns
+        'coor_df' and 'fim_coor_df'
 
     point1: int
         Registration label of your first point of choice.
@@ -490,7 +504,8 @@ def reg_coefficients(df, point1, point2, point3):
     Returns
     -------
     ainv: array
-        An array that has the inverse of your coefficients from your affien transformation. 
+        An array that has the inverse of your coefficients from your
+        affine transformation. 
 
     """
     row1 = point1-1
