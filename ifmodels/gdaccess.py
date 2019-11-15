@@ -22,6 +22,8 @@ def download(new_file_name, file_id):
     N/A:
         The function downloads a file onto the actual computer
         under new_file_name
+        
+        https://developers.google.com/drive/api/v3/quickstart/python?source=post_page
 
     """
     SCOPES = 'https://www.googleapis.com/auth/drive.readonly'  # noqa: F841
