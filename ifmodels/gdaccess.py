@@ -9,7 +9,23 @@ import io
 from googleapiclient.http import MediaIoBaseDownload
 
 def download(new_file_name, file_id):
-    #Downloads files from google drive
+    """
+    A function that accesses and downloads files from Google Drive.
+
+    Parameters
+    ----------
+    new_file_name: string
+        The file name you want a google doc to have after download.
+    
+    file_if: string
+        The file id of your desired file on google drive.
+ 
+    Returns
+    -------
+    N/A:
+        The function downloads a file onto the actual computer under new_file_name
+    
+    """
     SCOPES = 'https://www.googleapis.com/auth/drive.readonly'
     store = file.Storage('token.json')
     creds = store.get()
