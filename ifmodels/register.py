@@ -75,12 +75,13 @@ def image_cleaning(binary):
         The maximum intensity projection of the read image.
 
     """
-    binary = remove_small_objects(binary, min_size=3000, connectivity=1, in_place=True)
-    imagex,imagey = binary.shape
-    xrange=int(imagex/10)
-    yrange=int(imagey/10)
-    xfull=imagex
-    yfull=imagey
+    binary = remove_small_objects(binary, min_size=3000, connectivity=1,
+                                  in_place=True)
+    # imagex,imagey = binary.shape
+    # xrange=int(imagex/10)
+    # yrange=int(imagey/10)
+    # xfull=imagex
+    # yfull=imagey
 
     return binary
 
