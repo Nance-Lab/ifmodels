@@ -20,14 +20,16 @@ def download(new_file_name, file_id):
     Returns
     -------
     N/A:
-        The function downloads a file onto the actual computer under new_file_name
+        The function downloads a file onto the actual computer
+        under new_file_name
 
     """
-    SCOPES = 'https://www.googleapis.com/auth/drive.readonly'
+    SCOPES = 'https://www.googleapis.com/auth/drive.readonly' # noqa: F841
     store = file.Storage('token.json')
     creds = store.get()
     DRIVE = discovery.build('drive', 'v3', http=creds.authorize(Http()))
-    # if you get the shareable link, the link contains this id, replace the file_id below
+    # if you get the shareable link, the link contains this id, 
+    # replace the file_id below
     request = DRIVE.files().get_media(fileId=file_id)
     # replace the filename and extension in the first field below
     fh = io.FileIO(new_file_name, mode='w')
