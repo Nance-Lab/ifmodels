@@ -524,7 +524,7 @@ def reg_coefficients(df, point1, point2, point3):
     return ainv
 
 
-def registration(image, coefficients):
+def registration(image, resized_atlas, coefficients):
     """
     A function that transforms the moving image onto a fixed atlas.
 
@@ -550,7 +550,8 @@ def registration(image, coefficients):
     inve = coefficients[1][1]
     invf = coefficients[1][2]
     im = Image.fromarray(image)
-    atlas_size = (3200, 4280)
+    #atlas_size = (3200, 4280)
+    atlas_size = (resized_atlas.shape[1], resized_atlas.shape[0])
     im12 = im.transform(atlas_size, Image.AFFINE,
                         (inva, invb, invc, invd, inve, invf),
                         resample=Image.NEAREST)
